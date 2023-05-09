@@ -16,7 +16,7 @@
             </form>
         </div>
         <div class="md:w-1/2 px-10 w-4/12 bg-white p-6 rounded-lg shadow-xl">
-            <form action="" method="POST">
+            <form action="{{route('muro.store')}}" method="POST">
                 @csrf
                 <div class="mb-5">
                     <label class="mb-2 block text-gray-700 font-bold uppercase" for="titulo">Título</label>
@@ -32,6 +32,14 @@
                         {{ old('descripcion') }}
                     </textarea>
                 </div>
+                <div class="mb-5 ">
+                    <input type="hidden" name="imagen" value="{{ old('imagen')}}">
+                    @error()
+                        <p class="text-red-700 my-2">
+                            {{$message}}
+                        </p>
+                    @enderror    
+                </div>                
                 <input
                     class="cursor-pointer hover:bg-sky-700 uppercase w-full rounded-lg font-bold bg-sky-600 text-white p-2"
                     type="submit" value="Publicar">

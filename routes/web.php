@@ -3,9 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MuroController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\imagencontroller;
 use App\Http\Controllers\LogoutController;
-use App\Http\Controllers\ImagenController;
+use App\Http\Controllers\auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,24 +18,24 @@ use App\Http\Controllers\ImagenController;
 |
 */
 
-
 Route::get('/', function () {
     return view('principal');
-})->name('index');
+})-> name('index');
 
-Route::get('/cuenta', [RegisterController::class, 'index'])->name('cuenta.index');
-Route::post('/cuenta', [RegisterController::class, 'store'])->name('cuenta.store');
+route::get('/cuenta', [RegisterController::class,'index'])->name('cuenta.index');
 
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+route::post('/cuenta', [RegisterController::class,'store'])->name('cuenta.store');
 
-Route::post('/logout', [LogoutController::class, 'store'])->name('logout.store');
+route::get('/login', [LoginController::class,'index'])->name('login');
 
-Route::get('/{user:username}', [MuroController::class, 'index'])->name('muro.index');
+route::post('/login', [LoginController::class,'store'])->name('login.store');
 
-Route::get('/muro/create', [MuroController::class, 'create'])->name('muro.create');
+route::post('/logout',[LogoutController::class,'store'])->name('logout.store');
 
-Route::post('/imagen', [ImagenController::class, 'store'])->name('imagen.store');
+route::get('/{user:username}', [MuroController::class,'index'])->name('muro.index');
 
-Route::post('/muro', [MuroController::class,'store'])->name('muro.store');
+route::get('muro/create', [MuroController::class,'create'])->name('muro.create');
 
+route::post('/imagen',[imagencontroller::class,'store'])->name('imagen.store');
+
+route::post('/muro',[MuroController::class,'store'])->name('muro.store');

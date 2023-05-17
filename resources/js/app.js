@@ -3,14 +3,30 @@ import Dropzone from "dropzone";
 Dropzone.autoDiscover = false;
 
 const dropzone = new Dropzone('#dropzone',{
-    dictDefaultMessage:'Da clic para subir fotografía',
-    acceptedFiles:'.png,.jpg,.jpeg,.gif',
+    dictDefaultMessage:'da clic para subir una fotografia',
+    acceptedFiles:'.png, .jpg, .jpeg, .gif',
     addRemoveLinks:true,
-    dictRemoveFile:'Borrar fotografía',
+    dictRemoveFile: 'Borrar fotografia',
     maxFiles:1,
     uploadMultiple:false,
-})
 
-dropzone.on('success',function(file,response){
-    document.querySelector('[name="imagen"]').value = response.image
+    init:function(){
+        if(document.querySelector('[name="imagen"]').value.trim()){
+            const imagenPublicada = {};
+            imagenPublicada.size = 1234;
+            imagenPublicada.name = document.querySelector(['name="image"'].value);
+
+            this.options.addedfiles.call(this,imagenPublicada);
+            this.options.thumbnail.call(this,imagenPublicada,'public/uploads/${imagenPublicada.name}');
+
+            imagenPublicada.previewElement.classList.add(
+                "dz-success",
+                "dz-complete"
+            );
+        }
+    }
+});
+
+dropzone.on('success', function(file,response){
+    document.querySelector('[name="imagen"]').value = response.imagen;
 });

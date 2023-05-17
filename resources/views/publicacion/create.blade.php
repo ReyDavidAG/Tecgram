@@ -4,13 +4,15 @@
 @endsection
 
 @push('styles')
-<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
 @endpush
+
 @section('contenido')
     <div class="md:flex md:items-center mx-5">
         <div class="md:w-1/2 px-10">
-            <form action="{{ route('imagen.store') }}" id="dropzone"
-                class="dropzone border-dashed border-2 w-full h-72 rounded flex flex-col justify-center items-center bg-transparent" enctype="multipart/form-data">
+            <form action="{{route('imagen.store')}}" id="dropzone"
+                class="dropzone border-dashed border-2 w-full h-72 rounded flex flex-col justify-center items-center bg-transparent"
+                method="POST" enctype="multipart/form-data">
                 @csrf
 
             </form>
@@ -32,14 +34,14 @@
                         {{ old('descripcion') }}
                     </textarea>
                 </div>
-                <div class="mb-5 ">
-                    <input type="hidden" name="imagen" value="{{ old('imagen')}}">
-                    @error()
-                        <p class="text-red-700 my-2">
-                            {{$message}}
-                        </p>
-                    @enderror    
-                </div>                
+
+                <div class="mb-5">
+                    <input type="hidden" name="imagen">
+                    @error('imagen')
+                        <p class="text-red-700 my-2">{{$message}}</p>
+                    @enderror
+                </div>
+
                 <input
                     class="cursor-pointer hover:bg-sky-700 uppercase w-full rounded-lg font-bold bg-sky-600 text-white p-2"
                     type="submit" value="Publicar">
